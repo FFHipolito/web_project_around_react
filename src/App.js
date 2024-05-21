@@ -1,12 +1,9 @@
-import logo from "./logo.svg";
-import "./App.css";
-
 function App() {
   return (
     <div class="page">
       <header class="header">
         <img
-          src="<%=require('./images/vector.png')%>"
+          src="./images/vector.png"
           alt="logo Around the US"
           class="header__logo"
         />
@@ -22,7 +19,7 @@ function App() {
                 <h1 class="profile__title"></h1>
                 <button class="profile__title-button" type="button">
                   <img
-                    src="<%=require('./images/caneta.png')%>"
+                    src="./images/caneta.png"
                     alt="Botão com uma caneta dentro"
                     class="profile__info-image"
                   />
@@ -33,7 +30,7 @@ function App() {
           </div>
           <button class="button profile__addbutton" type="button">
             <img
-              src="<%=require('./images/mais.png')%>"
+              src="./images/mais.png"
               alt="Botão com o sinal de mais dentro"
               class="profile__addbutton-img"
             />
@@ -92,7 +89,7 @@ function App() {
             </form>
             <button class="button popup__close-button">
               <img
-                src="<%=require('./images/close-icon.png')%>"
+                src="./images/close-icon.png"
                 alt="Fechar janela editar perfil"
               />
             </button>
@@ -137,7 +134,7 @@ function App() {
             </form>
             <button class="popup__close-button popup__close-button_card">
               <img
-                src="<%=require('./images/close-icon.png')%>"
+                src="./images/close-icon.png"
                 alt="Fechar janela novo local"
                 class="popup__card-image"
               />
@@ -151,7 +148,7 @@ function App() {
             <p class="popup__image-name"></p>
             <button class="popup__close-button popup__close-button_image">
               <img
-                src="<%=require('./images/close-icon-s.png')%>"
+                src="./images/close-icon-s.png"
                 alt="Fechar janela da imagem"
                 class="popup__image-button"
               />
@@ -191,7 +188,7 @@ function App() {
             <button class="popup__close-button" type="button">
               <img
                 class="popup__close-icon-img"
-                src="<%=require('./images/close-icon.png')%>"
+                src="./images/close-icon.png"
                 alt="Fechar popup"
               />
             </button>
