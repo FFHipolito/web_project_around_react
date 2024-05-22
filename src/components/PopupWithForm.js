@@ -1,11 +1,15 @@
 import closeIcon from "../images/close-icon.png";
 
-function PopupWithForm({ title, name, button, children }) {
+function PopupWithForm({ title, name, button, children, isOpen, onClose }) {
   return (
     <>
-      <section className={`popup ${name}`}>
+      <section className={`popup ${name} ${isOpen ? "popup_opened" : ""}`}>
         <div className="popup__container" id="cards-form">
-          <button type="button" className="popup__close-button">
+          <button
+            type="button"
+            className="popup__close-button"
+            onClick={onClose}
+          >
             <img
               className="popup__close-button"
               src={closeIcon}

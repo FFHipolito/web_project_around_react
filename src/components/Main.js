@@ -1,5 +1,3 @@
-import PopupWithForm from "./PopupWithForm.js";
-import PopupWithImage from "./PopupWithImage.js";
 import caneta from "../images/caneta.png";
 import mais from "../images/mais.png";
 
@@ -63,71 +61,6 @@ function Main({ onEditProfileClick, onAddPlaceClick, onEditAvatarClick }) {
             <span className="elements__like-count">""</span>
           </div>
         </template>
-
-        <PopupWithForm title="Editar Perfil" name="popup" button="Salvar">
-          <input
-            className="popup__input-text"
-            id="name-input"
-            type="text"
-            name="name"
-            placeholder="Nome"
-            minLength={2}
-            maxLength={40}
-            required=""
-          />
-          <span className="popup__error"></span>
-          <input
-            className="popup__input-text"
-            id="about-input"
-            type="text"
-            name="about"
-            placeholder="Sobre mim"
-            minLength={2}
-            maxLength={200}
-            required=""
-          />
-          <span className="popup__error"></span>
-        </PopupWithForm>
-
-        <PopupWithForm title="Novo Local" name="popup_card" button="Criar">
-          <input
-            className="popup__input-text popup__input-text_title"
-            id="title-input"
-            type="text"
-            name="title"
-            placeholder="Título"
-            minLength={2}
-            maxLength={30}
-            required=""
-          />
-          <span className="popup__error"></span>
-          <input
-            className="popup__input-text popup__input-text_url"
-            id="url-input"
-            type="url"
-            name="url"
-            placeholder="Link da imagem"
-            required=""
-          />
-          <span className="popup__error"></span>
-        </PopupWithForm>
-
-        <PopupWithForm
-          title="Alterar a foto do perfil"
-          name="popup_edit"
-          button="Salvar"
-        >
-          <input
-            className="popup__input-text popup__form-input-link"
-            id="avatar"
-            placeholder="Link da Imagem"
-            type="url"
-            name="image"
-            required=""
-          />
-        </PopupWithForm>
-
-        <PopupWithImage />
 
         <section className="popup popup_delete">
           <div className="popup__container">
