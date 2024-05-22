@@ -1,6 +1,6 @@
 function Footer() {
-  <footer class="footer">
-    <p class="footer__paragraph">© 2024 Around The U.S.</p>
+  <footer className="footer">
+    <p className="footer__paragraph">© 2024 Around The U.S.</p>
   </footer>;
 }
 
