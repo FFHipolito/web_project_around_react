@@ -1,7 +1,42 @@
+import { useState, useEffect } from "react";
+import { api } from "./Api.js";
+import Card from "./Card.js";
 import caneta from "../images/caneta.png";
 import mais from "../images/mais.png";
 
-function Main({ onEditProfileClick, onAddPlaceClick, onEditAvatarClick }) {
+function Main({
+  onEditProfileClick,
+  onAddPlaceClick,
+  onEditAvatarClick,
+  onCardClick,
+}) {
+  const [userName, setUserName] = useState("");
+  const [userDescription, setUserDescription] = useState("");
+  const [userAvatar, setUserAvatar] = useState("");
+  const [cards, setCards] = useState([]);
+
+  useEffect(() => {
+    api
+      .getUserInfo()
+      .then((userInfo) => {
+        setUserName(userInfo.name);
+        setUserDescription(userInfo.about);
+        setUserAvatar(userInfo.avatar);
+      })
+      .catch((error) => {
+        console.error("Erro ao buscar dados do usuário:", error);
+      });
+
+    api
+      .getInitialCards()
+      .then((initialCards) => {
+        setCards(initialCards);
+      })
+      .catch((error) => {
+        console.error("Erro ao buscar dados dos cartões:", error);
+      });
+  }, []);
+
   return (
     <>
       <main className="content">
@@ -12,11 +47,15 @@ function Main({ onEditProfileClick, onAddPlaceClick, onEditAvatarClick }) {
               className="profile__avatar-edit"
               onClick={onEditAvatarClick}
             >
-              <img className="profile__image" src="#" alt="Foto do usuário" />
+              <img
+                className="profile__image"
+                src={userAvatar}
+                alt="Foto do usuário"
+              />
             </button>
             <div className="profile__info-container">
               <div className="profile__title-container">
-                <h1 className="profile__title"></h1>
+                <h1 className="profile__title">{userName}</h1>
                 <button
                   className="profile__title-button"
                   type="button"
@@ -29,7 +68,7 @@ function Main({ onEditProfileClick, onAddPlaceClick, onEditAvatarClick }) {
                   />
                 </button>
               </div>
-              <p className="profile__subtitle"></p>
+              <p className="profile__subtitle">{userDescription}</p>
             </div>
           </div>
           <button
@@ -45,22 +84,12 @@ function Main({ onEditProfileClick, onAddPlaceClick, onEditAvatarClick }) {
           </button>
         </section>
 
-        <div className="elements"></div>
-        <template id="template">
-          <div className="elements__card">
-            <button id="button" className="elements__button-trash"></button>
-            <img className="elements__image" src="#" alt="Imagem do local" />
-            <div className="elements__group">
-              <h2 className="elements__title"></h2>
-              <button
-                id="likeButton"
-                className="elements__like-button"
-                type="submit"
-              ></button>
-            </div>
-            <span className="elements__like-count">""</span>
-          </div>
-        </template>
+        <div className="elements">
+          {cards.map((card) => (
+            <Card cardData={card} key={card._id} onCardClick={onCardClick} />
+          ))}
+        </div>
+        <template id="template"></template>
 
         <section className="popup popup_delete">
           <div className="popup__container">
