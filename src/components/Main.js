@@ -16,6 +16,11 @@ function Main({
   const [cards, setCards] = useState([]);
 
   useEffect(() => {
+    getUserData();
+    getCardsData();
+  }, []);
+
+  function getUserData() {
     api
       .getUserInfo()
       .then((userInfo) => {
@@ -26,7 +31,9 @@ function Main({
       .catch((error) => {
         console.error("Erro ao buscar dados do usuário:", error);
       });
+  }
 
+  function getCardsData() {
     api
       .getInitialCards()
       .then((initialCards) => {
@@ -35,7 +42,7 @@ function Main({
       .catch((error) => {
         console.error("Erro ao buscar dados dos cartões:", error);
       });
-  }, []);
+  }
 
   return (
     <>

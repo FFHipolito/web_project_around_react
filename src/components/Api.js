@@ -1,121 +1,65 @@
 class Api {
-  constructor({ baseUrl, headers }) {
+  constructor(baseUrl, options) {
     this._baseUrl = baseUrl;
-    this._headers = headers;
+    this._options = options;
+  }
+
+  _makeRequest(endpoint, method = "GET", body = null) {
+    const options = {
+      method,
+      headers: { ...this._options.headers },
+    };
+
+    if (body) {
+      options.headers["Content-Type"] = "application/json";
+      options.body = JSON.stringify(body);
+    }
+
+    return fetch(`${this._baseUrl}${endpoint}`, options).then((res) => {
+      if (!res.ok) Promise.reject(`Error: ${res.status}`);
+      return res.json();
+    });
   }
 
   getInitialCards() {
-    return fetch(`${this._baseUrl}/cards`, {
-      headers: this._headers,
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Error: ${res.status}`);
-    });
-  }
-
-  getUserInfo() {
-    return fetch(`${this._baseUrl}/users/me`, {
-      headers: this._headers,
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Error: ${res.status}`);
-    });
-  }
-
-  editProfile(name, about) {
-    return fetch(`${this._baseUrl}/users/me`, {
-      method: "PATCH",
-      headers: this._headers,
-      body: JSON.stringify({
-        name: name,
-        about: about,
-      }),
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Error: ${res.status}`);
-    });
+    return this._makeRequest("/cards");
   }
 
   createNewCard({ name, link }) {
-    return fetch(`${this._baseUrl}/cards`, {
-      method: "POST",
-      headers: this._headers,
-      body: JSON.stringify({
-        name: name,
-        link: link,
-      }),
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Error: ${res.status}`);
-    });
+    return this._makeRequest("/cards", "POST", { name, link });
   }
 
   deleteCard(cardId) {
-    return fetch(`${this._baseUrl}/cards/${cardId}`, {
-      method: "DELETE",
-      headers: this._headers,
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-
-      return Promise.reject(`Error: ${res.status}`);
-    });
+    return this._makeRequest(`/cards/${cardId}`, "DELETE");
   }
 
   addLikes(cardId) {
-    return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
-      method: "PUT",
-      headers: this._headers,
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-
-      return Promise.reject(`Error: ${res.status}`);
-    });
+    return this._makeRequest(`/cards/likes/${cardId}`, "PUT");
   }
 
   removeLikes(cardId) {
-    return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
-      method: "DELETE",
-      headers: this._headers,
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-
-      return Promise.reject(`Error: ${res.status}`);
-    });
+    return this._makeRequest(`/cards/likes/${cardId}`, "DELETE");
   }
 
-  editAvatar({ avatar }) {
-    return fetch(`${this._baseUrl}/users/me/avatar`, {
-      method: "PATCH",
-      headers: this._headers,
-      body: JSON.stringify({ avatar: avatar }),
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
+  getUserInfo() {
+    return this._makeRequest("/users/me");
+  }
 
-      return Promise.reject(`Error: ${res.status}`);
-    });
+  editProfile(name, about) {
+    return this._makeRequest("/users/me", "PATCH", { name, about });
+  }
+
+  editAvatar(avatar) {
+    return this._makeRequest("/users/me/avatar", "PATCH", avatar);
   }
 }
 
-export const api = new Api({
-  baseUrl: "https://around.nomoreparties.co/v1/web-ptbr-cohort-10",
-  headers: {
-    authorization: "e00364f1-af4a-4601-a0ac-2228485dc1a7",
-    "Content-Type": "application/json",
-  },
-});
+export const api = new Api(
+  "https://around.nomoreparties.co/v1/web-ptbr-cohort-10",
+  {
+    headers: {
+      authorization: "e00364f1-af4a-4601-a0ac-2228485dc1a7",
+      "Content-Type": "application/json",
+    },
+  }
+);
