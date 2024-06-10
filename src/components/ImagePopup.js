@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import closeIconS from "../images/close-icon-s.png";
 
-function PopupWithImage({ card, onClose }) {
+function ImagePopup({ card, onClose }) {
   const overlay = useRef();
 
   function handleCloseClickOverlay(e) {
@@ -40,4 +40,4 @@ function PopupWithImage({ card, onClose }) {
   );
 }
 
-export default PopupWithImage;
+export default ImagePopup;

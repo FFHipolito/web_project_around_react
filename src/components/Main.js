@@ -74,7 +74,7 @@ function Main({
           ))}
         </div>
         <template id="template"></template>
-        {/* <section className="popup popup_delete">
+        <section className="popup popup_delete">
           <div className="popup__container">
             <button className="popup__close-button" type="button">
               <img
@@ -88,7 +88,7 @@ function Main({
               Sim
             </button>
           </div>
-        </section> */}
+        </section>
       </main>
     </>
   );

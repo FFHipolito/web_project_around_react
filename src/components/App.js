@@ -1,9 +1,9 @@
 import Header from "./Header.js";
 import Main from "./Main.js";
 import Footer from "./Footer.js";
-import PopupWithImage from "./PopupWithImage.js";
+import ImagePopup from "./ImagePopup.js";
 import { useState, useEffect } from "react";
-import api from "./Api.js";
+import api from "../utils/api";
 import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
 import EditProfilePopup from "./EditProfilePopup";
 import EditAvatarPopup from "./EditAvatarPopup";
@@ -126,7 +126,7 @@ function App() {
           onClose={closeAllPopups}
           onAddPlaceSubmit={handleCreateNewCard}
         />
-        <PopupWithImage card={selectedCard} onClose={closeAllPopups} />
+        <ImagePopup card={selectedCard} onClose={closeAllPopups} />
         <Footer />
       </CurrentUserContext.Provider>
     </div>
