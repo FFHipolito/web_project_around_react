@@ -45,21 +45,27 @@ class Api {
     return this._makeRequest("/users/me");
   }
 
-  editProfile(name, about) {
-    return this._makeRequest("/users/me", "PATCH", { name, about });
+  editProfile(userData) {
+    return this._makeRequest("/users/me", "PATCH", userData);
   }
 
-  editAvatar(avatar) {
-    return this._makeRequest("/users/me/avatar", "PATCH", avatar);
+  editAvatar({ avatar }) {
+    return this._makeRequest("/users/me/avatar", "PATCH", { avatar: avatar });
+  }
+
+  changeLikeCardStatus(cardId, isLiked) {
+    if (!isLiked) {
+      return this.addLikes(cardId);
+    }
+    return this.removeLikes(cardId);
   }
 }
 
-export const api = new Api(
-  "https://around.nomoreparties.co/v1/web-ptbr-cohort-10",
-  {
-    headers: {
-      authorization: "e00364f1-af4a-4601-a0ac-2228485dc1a7",
-      "Content-Type": "application/json",
-    },
-  }
-);
+const api = new Api("https://around.nomoreparties.co/v1/web-ptbr-cohort-10", {
+  headers: {
+    authorization: "e00364f1-af4a-4601-a0ac-2228485dc1a7",
+    "Content-Type": "application/json",
+  },
+});
+
+export default api;

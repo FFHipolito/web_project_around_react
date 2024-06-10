@@ -1,48 +1,19 @@
-import { useState, useEffect } from "react";
-import { api } from "./Api.js";
+import { useContext } from "react";
+import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
 import Card from "./Card.js";
 import caneta from "../images/caneta.png";
 import mais from "../images/mais.png";
 
 function Main({
+  cards,
   onEditProfileClick,
   onAddPlaceClick,
   onEditAvatarClick,
   onCardClick,
+  onCardLike,
+  onCardDelete,
 }) {
-  const [userName, setUserName] = useState("");
-  const [userDescription, setUserDescription] = useState("");
-  const [userAvatar, setUserAvatar] = useState("");
-  const [cards, setCards] = useState([]);
-
-  useEffect(() => {
-    getUserData();
-    getCardsData();
-  }, []);
-
-  function getUserData() {
-    api
-      .getUserInfo()
-      .then((userInfo) => {
-        setUserName(userInfo.name);
-        setUserDescription(userInfo.about);
-        setUserAvatar(userInfo.avatar);
-      })
-      .catch((error) => {
-        console.error("Erro ao buscar dados do usuário:", error);
-      });
-  }
-
-  function getCardsData() {
-    api
-      .getInitialCards()
-      .then((initialCards) => {
-        setCards(initialCards);
-      })
-      .catch((error) => {
-        console.error("Erro ao buscar dados dos cartões:", error);
-      });
-  }
+  const currentUser = useContext(CurrentUserContext);
 
   return (
     <>
@@ -56,13 +27,13 @@ function Main({
             >
               <img
                 className="profile__image"
-                src={userAvatar}
+                src={currentUser.avatar}
                 alt="Foto do usuário"
               />
             </button>
             <div className="profile__info-container">
               <div className="profile__title-container">
-                <h1 className="profile__title">{userName}</h1>
+                <h1 className="profile__title">{currentUser.name}</h1>
                 <button
                   className="profile__title-button"
                   type="button"
@@ -75,7 +46,7 @@ function Main({
                   />
                 </button>
               </div>
-              <p className="profile__subtitle">{userDescription}</p>
+              <p className="profile__subtitle">{currentUser.about}</p>
             </div>
           </div>
           <button
@@ -93,12 +64,17 @@ function Main({
 
         <div className="elements">
           {cards.map((card) => (
-            <Card cardData={card} key={card._id} onCardClick={onCardClick} />
+            <Card
+              cardData={card}
+              key={card._id}
+              onCardClick={onCardClick}
+              onCardDelete={onCardDelete}
+              onCardLike={onCardLike}
+            />
           ))}
         </div>
         <template id="template"></template>
-
-        <section className="popup popup_delete">
+        {/* <section className="popup popup_delete">
           <div className="popup__container">
             <button className="popup__close-button" type="button">
               <img
@@ -112,7 +88,7 @@ function Main({
               Sim
             </button>
           </div>
-        </section>
+        </section> */}
       </main>
     </>
   );

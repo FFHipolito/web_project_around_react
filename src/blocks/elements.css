@@ -19,7 +19,6 @@
   width: 18px;
   height: 20px;
   background-color: transparent;
-  background-image: url(../images/trash.png);
   background-size: cover;
   border: none;
   cursor: pointer;
@@ -30,6 +29,12 @@
 
 .elements__button-trash:hover {
   opacity: 0.6;
+}
+
+.elements__button-trash_hidden {
+  background-image: url(../images/trash.png);
+  visibility: visible;
+  opacity: 100%;
 }
 
 .elements__image {
@@ -79,7 +84,7 @@
 }
 
 .elements__like-count {
-  margin-left: 252px;
+  margin-left: 254px;
   color: black;
   font-size: 13px;
   font-family: Inter;

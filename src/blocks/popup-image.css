@@ -13,6 +13,7 @@
   background-color: transparent;
   padding: 0;
   margin-top: 50%;
+  position: absolute;
 }
 
 .popup__image {
@@ -29,8 +30,9 @@
 }
 
 .popup__close-button_image {
-  top: 53%;
-  left: 64%;
+  position: relative;
+  top: 3px;
+  left: 450px;
 }
 
 @media only screen and (max-width: 1000px) {
