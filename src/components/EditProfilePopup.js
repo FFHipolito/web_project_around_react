@@ -42,7 +42,7 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
           placeholder="Nome"
           minLength={2}
           maxLength={40}
-          required=""
+          required
         />
         <span className="popup__error"></span>
         <input
@@ -57,7 +57,7 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
           placeholder="Sobre mim"
           minLength={2}
           maxLength={200}
-          required=""
+          required
         />
         <span className="popup__error"></span>
       </>

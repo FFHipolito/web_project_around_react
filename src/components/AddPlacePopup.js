@@ -44,7 +44,7 @@ function AddPlacePopup({ isOpen, onClose, onAddPlaceSubmit }) {
           placeholder="Título"
           minLength={2}
           maxLength={30}
-          required=""
+          required
         />
         <span className="popup__error"></span>
         <input
@@ -57,7 +57,7 @@ function AddPlacePopup({ isOpen, onClose, onAddPlaceSubmit }) {
           type="url"
           name="url"
           placeholder="Link da imagem"
-          required=""
+          required
         />
         <span className="popup__error"></span>
       </>

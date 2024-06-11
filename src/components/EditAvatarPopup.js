@@ -34,7 +34,7 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
           placeholder="Link da Imagem"
           type="url"
           name="image"
-          required=""
+          required
         />
         <span className="popup__error"></span>
       </>
